@@ -1,0 +1,31 @@
+services:
+  backend:
+    build: ./backend
+    container_name: monitor-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - DB_PATH=/app/data/monitor.db
+      - MONITOR_CRON=0 */12 * * *
+      - RUN_ON_STARTUP=true
+      # Uncomment and fill in to enable email alerts
+      # - SMTP_HOST=smtp.example.com
+      # - SMTP_PORT=587
+      # - SMTP_SECURE=false
+      # - SMTP_USER=user
+      # - SMTP_PASS=pass
+      # - SMTP_FROM=Monitor <no-reply@example.com>
+    volumes:
+      - ./backend/data:/app/data
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build: ./frontend
+    container_name: monitor-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
