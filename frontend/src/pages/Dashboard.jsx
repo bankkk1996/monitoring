@@ -99,7 +99,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-sm text-slate-500">Auto-refreshes every 60 seconds.</p>
+        <p className="text-sm text-slate-500">Auto-refreshes every 1 days.</p>
         <button className="btn-primary" onClick={runCheck} disabled={running}>
           {running && <Spinner className="w-4 h-4" />} Run check now
         </button>
